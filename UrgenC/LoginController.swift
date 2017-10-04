@@ -10,9 +10,10 @@ import UIKit
 
 class LoginController: UIViewController {
     
-    let profileImageView: UIImageView = {
+    let logoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "??")
+        imageView.image = #imageLiteral(resourceName: "ucLogo")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
         
         return imageView
     }()
@@ -76,7 +77,7 @@ class LoginController: UIViewController {
         textField.isSecureTextEntry = true      //masked text when entering pw
         
         return textField
-    }()  
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,10 +86,21 @@ class LoginController: UIViewController {
         
         view.addSubview(inputsContainerView)
         view.addSubview(loginRegisterButton)
+        view.addSubview(logoImageView)
         
         setupContainerView()
         setupLoginRegButton()
+        setupProfileImageView()
 
+    }
+    
+    func setupProfileImageView() {
+        //setup autolayout for image
+        logoImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        logoImageView.centerYAnchor.constraint(equalTo: inputsContainerView.topAnchor, constant: -105).isActive = true
+        logoImageView.widthAnchor.constraint(equalToConstant: 250).isActive = true
+        logoImageView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        
     }
     
     func setupLoginRegButton() {
@@ -149,12 +161,15 @@ class LoginController: UIViewController {
         
     }
     
+    //change status bar to light color
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 
 }
 
+
+//extension to UIColor for easier rgb inputs
 extension UIColor {
     convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
         self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
