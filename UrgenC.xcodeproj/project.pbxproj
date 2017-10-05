@@ -7,15 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		33F8E940324E0E14C0532B3B /* Pods_UrgenC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF536A06239C49C1139358C /* Pods_UrgenC.framework */; };
 		8D046C031F847A5A00469D01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D046C021F847A5A00469D01 /* AppDelegate.swift */; };
 		8D046C051F847A5A00469D01 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D046C041F847A5A00469D01 /* ViewController.swift */; };
 		8D046C081F847A5A00469D01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D046C061F847A5A00469D01 /* Main.storyboard */; };
 		8D046C0A1F847A5A00469D01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8D046C091F847A5A00469D01 /* Assets.xcassets */; };
 		8D046C0D1F847A5A00469D01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8D046C0B1F847A5A00469D01 /* LaunchScreen.storyboard */; };
 		8D046C161F847D0500469D01 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D046C151F847D0500469D01 /* LoginController.swift */; };
+		8D37550C1F85BCEC0052940E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8D37550B1F85BCEC0052940E /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1C83C28549372C1EDF1BB067 /* Pods-UrgenC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrgenC.release.xcconfig"; path = "Pods/Target Support Files/Pods-UrgenC/Pods-UrgenC.release.xcconfig"; sourceTree = "<group>"; };
+		1DF536A06239C49C1139358C /* Pods_UrgenC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UrgenC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D046BFF1F847A5A00469D01 /* UrgenC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UrgenC.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D046C021F847A5A00469D01 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8D046C041F847A5A00469D01 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +28,8 @@
 		8D046C0C1F847A5A00469D01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8D046C0E1F847A5A00469D01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D046C151F847D0500469D01 /* LoginController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
+		8D37550B1F85BCEC0052940E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		924E3478C63011853F9A479F /* Pods-UrgenC.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrgenC.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UrgenC/Pods-UrgenC.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +37,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				33F8E940324E0E14C0532B3B /* Pods_UrgenC.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7E2DA2DA7616078D15CA08D0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				924E3478C63011853F9A479F /* Pods-UrgenC.debug.xcconfig */,
+				1C83C28549372C1EDF1BB067 /* Pods-UrgenC.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		8D046BF61F847A5A00469D01 = {
 			isa = PBXGroup;
 			children = (
 				8D046C011F847A5A00469D01 /* UrgenC */,
 				8D046C001F847A5A00469D01 /* Products */,
+				7E2DA2DA7616078D15CA08D0 /* Pods */,
+				C41BB98D0337A190B402DF91 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -62,6 +80,7 @@
 				8D046C091F847A5A00469D01 /* Assets.xcassets */,
 				8D046C0B1F847A5A00469D01 /* LaunchScreen.storyboard */,
 				8D046C0E1F847A5A00469D01 /* Info.plist */,
+				8D37550B1F85BCEC0052940E /* GoogleService-Info.plist */,
 			);
 			path = UrgenC;
 			sourceTree = "<group>";
@@ -75,6 +94,14 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		C41BB98D0337A190B402DF91 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1DF536A06239C49C1139358C /* Pods_UrgenC.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -82,9 +109,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8D046C111F847A5A00469D01 /* Build configuration list for PBXNativeTarget "UrgenC" */;
 			buildPhases = (
+				A90AB36675FF408196F039A6 /* [CP] Check Pods Manifest.lock */,
 				8D046BFB1F847A5A00469D01 /* Sources */,
 				8D046BFC1F847A5A00469D01 /* Frameworks */,
 				8D046BFD1F847A5A00469D01 /* Resources */,
+				3B138C965710A1059C59B6D4 /* [CP] Embed Pods Frameworks */,
+				78979A94F9C6A30D7F4D7830 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -136,12 +166,73 @@
 			buildActionMask = 2147483647;
 			files = (
 				8D046C0D1F847A5A00469D01 /* LaunchScreen.storyboard in Resources */,
+				8D37550C1F85BCEC0052940E /* GoogleService-Info.plist in Resources */,
 				8D046C0A1F847A5A00469D01 /* Assets.xcassets in Resources */,
 				8D046C081F847A5A00469D01 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3B138C965710A1059C59B6D4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-UrgenC/Pods-UrgenC-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UrgenC/Pods-UrgenC-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		78979A94F9C6A30D7F4D7830 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UrgenC/Pods-UrgenC-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A90AB36675FF408196F039A6 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-UrgenC-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8D046BFB1F847A5A00469D01 /* Sources */ = {
@@ -271,6 +362,7 @@
 		};
 		8D046C121F847A5A00469D01 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 924E3478C63011853F9A479F /* Pods-UrgenC.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = H92Y9U5LKL;
@@ -284,6 +376,7 @@
 		};
 		8D046C131F847A5A00469D01 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1C83C28549372C1EDF1BB067 /* Pods-UrgenC.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = H92Y9U5LKL;
@@ -314,6 +407,7 @@
 				8D046C131F847A5A00469D01 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
