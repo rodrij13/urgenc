@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController: UIViewController {
     
@@ -35,9 +36,49 @@ class LoginController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        
         return button
     }()
-
+    
+    func handleRegister() {
+        print("Register Pressed")
+        //safely unwrap uitextfields
+        guard let email = emailTextField.text, let password = passwordTextField.text, let name = nameTextField.text
+            else {
+                print("Invalid Form")
+                return
+        }
+        
+        //auth user with email and pw
+        Auth.auth().createUser(withEmail: email, password: password, completion: {( user: User?, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            //successfully authd user
+            
+            //unwrap uid
+            guard let uid = user?.uid else {
+                return
+            }
+            
+            //save user into database
+            let ref = Database.database().reference(fromURL: "https://urgenc-8271f.firebaseio.com/")    //setup ref to my db
+            let usersRef = ref.child("users").child(uid)        //create ref for users, with children users and uid
+            let values = ["email": email, "name": name]         //create dictionary from email and name input
+            usersRef.updateChildValues(values, withCompletionBlock: {(err, ref) in      //input values into user ref
+                if let err = err {
+                    print(err)
+                    return
+                }
+                
+                //successfully saved user into database
+            })
+            
+        })
+    }
+    
     let nameTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Name"
