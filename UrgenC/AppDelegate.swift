@@ -17,12 +17,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        FirebaseApp.configure()         //configure firebase before use
+        FirebaseApp.configure()                                 //configure firebase before use
         
-        window = UIWindow(frame: UIScreen.main.bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)          //disable storyboard
         window?.makeKeyAndVisible()
-        
         window?.rootViewController = UINavigationController(rootViewController: ViewController())
+        
         return true
     }
 
