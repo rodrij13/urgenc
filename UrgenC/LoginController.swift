@@ -70,11 +70,46 @@ class LoginController: UIViewController {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button.addTarget(self, action: #selector(handleRegister), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
         
         return button
     }()
     
+    /*
+     This function is used whenever the register/login button is pressed to either handle a login or handle a register
+     */
+    func handleLoginRegister() {
+        if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
+            handleLogin()
+        } else {
+            handleRegister()
+        }
+    }
+    
+    /*
+     Handles login with email and password registered into db
+     */
+    func handleLogin() {
+        //unwrap text fields
+        guard let email = emailTextField.text, let password = passwordTextField.text
+            else {
+                print("Invalid Form")
+                return
+        }
+        //sign in user with email and pw
+        Auth.auth().signIn(withEmail: email, password: password, completion: {(user, error) in
+            if let error = error {
+                print(error)
+                return
+            }
+            //dismiss login/reg view if successful
+            self.dismiss(animated: true, completion: nil)
+        })
+    }
+    
+    /*
+     Registers user into firebase db
+     */
     func handleRegister() {
         print("Register Pressed")
         //safely unwrap uitextfields
@@ -106,8 +141,7 @@ class LoginController: UIViewController {
                     print(err)
                     return
                 }
-                
-                //successfully saved user into database
+                self.dismiss(animated: true, completion: nil)                //successfully saved user into database, dismiss login viewcontroller
             })
             
         })
