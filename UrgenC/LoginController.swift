@@ -102,6 +102,7 @@ class LoginController: UIViewController {
                 print(error)
                 return
             }
+            
             //dismiss login/reg view if successful
             self.dismiss(animated: true, completion: nil)
         })
