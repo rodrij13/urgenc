@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		152E61BA20AA0EB700B22D70 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152E61B920AA0EB700B22D70 /* Message.swift */; };
+		1575C0D120AAB6FC005F1453 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1575C0D020AAB6FC005F1453 /* User.swift */; };
+		1575C0D320AABBDD005F1453 /* ChatLogController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1575C0D220AABBDD005F1453 /* ChatLogController.swift */; };
 		158C94F31FE8515B0076F5EA /* NewMessageController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C94F21FE8515B0076F5EA /* NewMessageController.swift */; };
-		158C94F61FE857A90076F5EA /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158C94F51FE857A90076F5EA /* Users.swift */; };
 		33F8E940324E0E14C0532B3B /* Pods_UrgenC.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1DF536A06239C49C1139358C /* Pods_UrgenC.framework */; };
 		8D046C031F847A5A00469D01 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D046C021F847A5A00469D01 /* AppDelegate.swift */; };
 		8D046C051F847A5A00469D01 /* MessagesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D046C041F847A5A00469D01 /* MessagesController.swift */; };
@@ -20,8 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		152E61B920AA0EB700B22D70 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		1575C0D020AAB6FC005F1453 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		1575C0D220AABBDD005F1453 /* ChatLogController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatLogController.swift; sourceTree = "<group>"; };
 		158C94F21FE8515B0076F5EA /* NewMessageController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewMessageController.swift; sourceTree = "<group>"; };
-		158C94F51FE857A90076F5EA /* Users.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		1C83C28549372C1EDF1BB067 /* Pods-UrgenC.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UrgenC.release.xcconfig"; path = "Pods/Target Support Files/Pods-UrgenC/Pods-UrgenC.release.xcconfig"; sourceTree = "<group>"; };
 		1DF536A06239C49C1139358C /* Pods_UrgenC.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_UrgenC.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8D046BFF1F847A5A00469D01 /* UrgenC.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UrgenC.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -51,7 +55,8 @@
 		158C94F41FE8577C0076F5EA /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				158C94F51FE857A90076F5EA /* Users.swift */,
+				152E61B920AA0EB700B22D70 /* Message.swift */,
+				1575C0D020AAB6FC005F1453 /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -104,6 +109,7 @@
 				8D046C151F847D0500469D01 /* LoginController.swift */,
 				8D046C041F847A5A00469D01 /* MessagesController.swift */,
 				158C94F21FE8515B0076F5EA /* NewMessageController.swift */,
+				1575C0D220AABBDD005F1453 /* ChatLogController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -256,8 +262,10 @@
 				158C94F31FE8515B0076F5EA /* NewMessageController.swift in Sources */,
 				8D046C051F847A5A00469D01 /* MessagesController.swift in Sources */,
 				8D046C161F847D0500469D01 /* LoginController.swift in Sources */,
-				158C94F61FE857A90076F5EA /* Users.swift in Sources */,
+				1575C0D320AABBDD005F1453 /* ChatLogController.swift in Sources */,
 				8D046C031F847A5A00469D01 /* AppDelegate.swift in Sources */,
+				152E61BA20AA0EB700B22D70 /* Message.swift in Sources */,
+				1575C0D120AAB6FC005F1453 /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

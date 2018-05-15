@@ -100,9 +100,11 @@ class LoginController: UIViewController {
         Auth.auth().signIn(withEmail: email, password: password, completion: {(user, error) in
             if let error = error {
                 print(error)
+                let alert = UIAlertController(title: "Attention", message: "Invalid username/password", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Close", style: .default, handler: nil))
+                self.present(alert, animated: true)
                 return
             }
-            
             //dismiss login/reg view if successful
             self.dismiss(animated: true, completion: nil)
         })
@@ -119,32 +121,26 @@ class LoginController: UIViewController {
                 print("Invalid Form")
                 return
         }
-        
-        //auth user with email and pw
-        Auth.auth().createUser(withEmail: email, password: password, completion: {( user: User?, error) in
+        Auth.auth().createUser(withEmail: email, password: password, completion: {(authResponse, error) in
             if let error = error {
                 print(error)
                 return
             }
-            //successfully authd user
             
-            //unwrap uid
-            guard let uid = user?.uid else {
+            guard let uid = authResponse?.uid else {
                 return
             }
             
-            //save user into database
-            let ref = Database.database().reference(fromURL: "https://urgenc-8271f.firebaseio.com/")    //setup ref to my db
-            let usersRef = ref.child("users").child(uid)        //create ref for users, with children users and uid
-            let values = ["email": email, "name": name]         //create dictionary from email and name input
-            usersRef.updateChildValues(values, withCompletionBlock: {(err, ref) in      //input values into user ref
+            let ref = Database.database().reference(fromURL: "https://urgenc-8271f.firebaseio.com/")
+            let userRef = ref.child("users").child(uid)
+            let values = ["email": email, "name": name]
+            userRef.updateChildValues(values, withCompletionBlock: {(err, ref) in
                 if let err = err {
                     print(err)
                     return
                 }
-                self.dismiss(animated: true, completion: nil)                //successfully saved user into database, dismiss login viewcontroller
+                self.dismiss(animated: true, completion: nil)
             })
-            
         })
     }
     

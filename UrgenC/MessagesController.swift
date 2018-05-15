@@ -5,12 +5,12 @@
 //  Created by Juan Rodriguez on 10/3/17.
 //  Copyright © 2017 Juan Rodriguez. All rights reserved.
 //
-
 import UIKit
 import Firebase
 
 class MessagesController: UITableViewController {
-
+    var loggedinUser = User()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -18,14 +18,21 @@ class MessagesController: UITableViewController {
         
         let image = UIImage(named: "newMessageIcon")
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleNewMessage))
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
         checkIfUserIsLoggedIn()
+        loadMessages()
+    }
+    
+    func loadMessages() {
+        print("loading messages...")
     }
     
     func handleNewMessage() {
         let newMessageController = NewMessageController()
-        let navContoller = UINavigationController(rootViewController: newMessageController)
-        present(navContoller, animated: true, completion: nil)
+        self.navigationController?.pushViewController(newMessageController, animated: true)
     }
     
     func checkIfUserIsLoggedIn() {
@@ -37,13 +44,14 @@ class MessagesController: UITableViewController {
             let uid = Auth.auth().currentUser?.uid
             Database.database().reference().child("users").child(uid!).observeSingleEvent(of: .value, with: {
                 (snapshot) in
-                //display item name in title
                 if let dictionary = snapshot.value as? [String: AnyObject] {
+                    self.loggedinUser.name = dictionary["name"] as? String
+                    self.loggedinUser.uid = snapshot.key
+                    self.loggedinUser.email = dictionary["email"] as? String
                     self.navigationItem.title = dictionary["name"] as? String
                 }
             }, withCancel: nil)
         }
-        
     }
 
     func handleLogout() {
