@@ -9,14 +9,20 @@ import UIKit
 import Firebase
 
 class NewMessageController: UITableViewController {
+    /*
+     *  FIELDS
+     */
     let cellId = "cellId"
     var users = [User]()
     var selectedUser = User()
     
+    /*
+     *  METHODS
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBack))
-        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(handleBack))
+        self.navigationItem.title = "New Message"
         tableView.register(UserCell.self, forCellReuseIdentifier: cellId)
         
         fetchUsers()
@@ -57,15 +63,5 @@ class NewMessageController: UITableViewController {
         cell.textLabel?.text = user.name
         cell.detailTextLabel?.text = user.email
         return cell
-    }
-}
-
-class UserCell: UITableViewCell {
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: .subtitle, reuseIdentifier: reuseIdentifier)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
 }

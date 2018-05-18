@@ -9,14 +9,28 @@ import UIKit
 import Firebase
 
 class ChatLogController : UICollectionViewController, UITextFieldDelegate {
+    /*
+     *  FIELDS
+     */
+    let cellId = "cellId"
     var receivingUser = User()
+    var messages = [Message]()
     
+    /*
+     *  UI
+     */
     lazy var inputTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter message..."
         textField.translatesAutoresizingMaskIntoConstraints = false
         textField.delegate = self
         return textField
+    }()
+    
+    var tableView: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        return table
     }()
     
     let containerView: UIView = {
@@ -40,15 +54,18 @@ class ChatLogController : UICollectionViewController, UITextFieldDelegate {
         return view
     }()
     
+    /*
+     *  METHODS
+     */
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = receivingUser.name
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(handleBack))
         collectionView?.backgroundColor = UIColor.white
-        setupInputComponents()
+        setupComponents()
     }
     
-    func setupInputComponents() {
+    func setupComponents() {
         view.addSubview(containerView)
 
         containerView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
@@ -76,6 +93,11 @@ class ChatLogController : UICollectionViewController, UITextFieldDelegate {
         separatorLineView.topAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
         separatorLineView.widthAnchor.constraint(equalTo: containerView.widthAnchor).isActive = true
         separatorLineView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+        
+        view.addSubview(tableView)
+        tableView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: containerView.topAnchor).isActive = true
     }
     
     func handleSend() {
@@ -87,7 +109,7 @@ class ChatLogController : UICollectionViewController, UITextFieldDelegate {
         }
         
         // Ref db and unwrap textView
-        let ref = Database.database().reference().child("messages").childByAutoId()
+        let msgRef = Database.database().reference().child("messages").childByAutoId()
         guard let msgText = inputTextField.text
             else {
                 print("invalid message text")
@@ -96,16 +118,22 @@ class ChatLogController : UICollectionViewController, UITextFieldDelegate {
         
         // Send if not empty
         if (!msgText.isEmpty) {
-            let values = ["text": msgText as NSObject, "fromUid": sendingUser.uid as NSObject, "toUid": receivingUser.uid! as NSObject]
-            ref.updateChildValues(values)
-            
-            print("Message sent successfully!")
+            // Add to messages tree
+            let timeStamp = NSDate().timeIntervalSince1970
+            let values = [
+                "text": msgText as NSObject,
+                "fromUid": sendingUser.uid as NSObject,
+                "toUid": receivingUser.uid! as NSObject,
+                "timeStamp": timeStamp
+                ] as [String : Any]
+            msgRef.updateChildValues(values)
             self.navigationController!.popToRootViewController(animated: true)
         } else {
             let alert = UIAlertController(title: "Attention", message: "Message is empty", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Close", style: .destructive, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
+        inputTextField.text = ""
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

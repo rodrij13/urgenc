@@ -10,6 +10,35 @@ import UIKit
 import Firebase
 
 class LoginController: UIViewController {
+    /*
+     *  UI
+     */
+    let logoImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = #imageLiteral(resourceName: "ucLogo")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    let inputsContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 5
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
+    let loginRegisterButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
+        button.setTitle("Register", for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
+        button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
+        return button
+    }()
     
     let loginRegisterSegmentedControl: UISegmentedControl = {
         let segControl = UISegmentedControl(items: ["Login", "Register"])
@@ -17,9 +46,63 @@ class LoginController: UIViewController {
         segControl.tintColor = UIColor.white
         segControl.selectedSegmentIndex = 1
         segControl.addTarget(self, action: #selector(handleLoginRegisterChange), for: .valueChanged)
-        
         return segControl
     }()
+    
+    let nameTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Name"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    let nameSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let emailTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Email Address"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        return textField
+    }()
+    
+    let emailSeparatorView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let passwordTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Password"
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.isSecureTextEntry = true      //masked text when entering pw
+        return textField
+    }()
+    
+    /*
+     *  METHODS
+    */
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(LoginController.endEditing)))
+        view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
+        
+        view.addSubview(inputsContainerView)
+        view.addSubview(loginRegisterButton)
+        view.addSubview(logoImageView)
+        view.addSubview(loginRegisterSegmentedControl)
+        
+        setupContainerView()
+        setupLoginRegButton()
+        setupProfileImageView()
+        setupSegControl()
+    }
     
     func handleLoginRegisterChange() {
         let title = loginRegisterSegmentedControl.titleForSegment(at: loginRegisterSegmentedControl.selectedSegmentIndex)       //get title for selected seg
@@ -42,42 +125,8 @@ class LoginController: UIViewController {
         passwordTextFieldHeightAnchor?.isActive = false
         passwordTextFieldHeightAnchor = passwordTextField.heightAnchor.constraint(equalTo: inputsContainerView.heightAnchor, multiplier: loginRegisterSegmentedControl.selectedSegmentIndex == 0 ? 1/2 : 1/3)
         passwordTextFieldHeightAnchor?.isActive = true
-        
     }
     
-    let logoImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "ucLogo")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        return imageView
-    }()
-    
-    let inputsContainerView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.white
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 5
-        view.layer.masksToBounds = true
-        
-        return view
-    }()
-    
-    let loginRegisterButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.backgroundColor = UIColor(r: 80, g: 101, b: 161)
-        button.setTitle("Register", for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitleColor(.white, for: .normal)
-        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        button.addTarget(self, action: #selector(handleLoginRegister), for: .touchUpInside)
-        
-        return button
-    }()
-    
-    /*
-     This function is used whenever the register/login button is pressed to either handle a login or handle a register
-     */
     func handleLoginRegister() {
         if loginRegisterSegmentedControl.selectedSegmentIndex == 0 {
             handleLogin()
@@ -86,17 +135,13 @@ class LoginController: UIViewController {
         }
     }
     
-    /*
-     Handles login with email and password registered into db
-     */
     func handleLogin() {
-        //unwrap text fields
         guard let email = emailTextField.text, let password = passwordTextField.text
             else {
                 print("Invalid Form")
                 return
         }
-        //sign in user with email and pw
+        
         Auth.auth().signIn(withEmail: email, password: password, completion: {(user, error) in
             if let error = error {
                 print(error)
@@ -110,9 +155,6 @@ class LoginController: UIViewController {
         })
     }
     
-    /*
-     Registers user into firebase db
-     */
     func handleRegister() {
         print("Register Pressed")
         //safely unwrap uitextfields
@@ -144,62 +186,8 @@ class LoginController: UIViewController {
         })
     }
     
-    let nameTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Name"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        
-        return textField
-    }()
-    
-    let nameSeparatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
-    
-    let emailTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Email Address"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        
-        return textField
-    }()
-    
-    let emailSeparatorView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(r: 220, g: 220, b: 220)
-        view.translatesAutoresizingMaskIntoConstraints = false
-        
-        return view
-    }()
-    
-    let passwordTextField: UITextField = {
-        let textField = UITextField()
-        textField.placeholder = "Password"
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.isSecureTextEntry = true      //masked text when entering pw
-        
-        return textField
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.backgroundColor = UIColor(r: 61, g: 91, b: 151)
-        
-        view.addSubview(inputsContainerView)
-        view.addSubview(loginRegisterButton)
-        view.addSubview(logoImageView)
-        view.addSubview(loginRegisterSegmentedControl)
-        
-        setupContainerView()
-        setupLoginRegButton()
-        setupProfileImageView()
-        setupSegControl()
-
+    func endEditing() {
+        self.view.endEditing(true)
     }
     
     func setupSegControl() {
@@ -235,7 +223,7 @@ class LoginController: UIViewController {
     func setupContainerView() {
         //add autolayout to input container
         inputsContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        inputsContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+        inputsContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: 40).isActive = true
         inputsContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -24).isActive = true
         inputsContainerViewHeightAnchor = inputsContainerView.heightAnchor.constraint(equalToConstant: 150)         //set the height anchor to the inputs cont. view h anchor
         inputsContainerViewHeightAnchor?.isActive = true        //make it active
@@ -293,9 +281,9 @@ class LoginController: UIViewController {
 }
 
 
-//extension to UIColor for easier rgb inputs
-extension UIColor {
-    convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
-        self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
-    }
-}
+////extension to UIColor for easier rgb inputs
+//extension UIColor {
+//    convenience init(r: CGFloat, g: CGFloat, b: CGFloat) {
+//        self.init(red: r/255, green: g/255, blue: b/255, alpha: 1)
+//    }
+//}
